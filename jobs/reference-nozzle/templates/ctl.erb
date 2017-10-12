@@ -1,0 +1,53 @@
+#!/bin/bash -e
+
+RUN_DIR=/var/vcap/sys/run/reference-nozzle
+LOG_DIR=/var/vcap/sys/log/reference-nozzle
+PIDFILE="${RUN_DIR}/reference-nozzle.pid"
+JOB_DIR=/var/vcap/jobs/reference-nozzle
+CERT_DIR="${JOB_DIR}/config/certs"
+
+PACKAGE_DIR=/var/vcap/packages/reference-nozzle
+
+case $1 in
+
+  start)
+    set +e
+      killall -15 refnozzle
+      killall -9 refnozzle
+      killall -2 refnozzle
+      killall -3 refnozzle
+    set -e
+
+    mkdir -p $RUN_DIR $LOG_DIR
+    chown -R vcap:vcap $RUN_DIR $LOG_DIR
+
+    cd $PACKAGE_DIR
+
+    echo $$ > $PIDFILE
+    exec chpst -u vcap:vcap ./refnozzle \
+      --ca=$CERT_DIR/mutual_tls_ca.crt \
+      --cert=$CERT_DIR/reference-nozzle.crt \
+      --key=$CERT_DIR/reference-nozzle.key \
+      --src="<%= p('refnozzle.source') %>" \
+      --dest="<%= p('refnozzle.destination') %>" \
+      &>> ${LOG_DIR}/refnozzle.log
+
+    ;;
+
+  stop)
+    set +e
+      killall -15 refnozzle
+      killall -9 refnozzle
+      killall -2 refnozzle
+      killall -3 refnozzle
+    set -e
+
+    rm -f $PIDFILE
+
+    ;;
+
+  *)
+    echo "Usage: ctl {start|stop}"
+
+    ;;
+esac

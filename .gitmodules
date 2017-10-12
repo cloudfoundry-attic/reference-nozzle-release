@@ -1,0 +1,15 @@
+[submodule "src/code.cloudfoundry.org/refnozzle"]
+	path = src/code.cloudfoundry.org/refnozzle
+	url = git@github.com:cloudfoundry-incubator/refnozzle
+[submodule "src/code.cloudfoundry.org/diodes"]
+	path = src/code.cloudfoundry.org/diodes
+	url = git@github.com:cloudfoundry/diodes
+[submodule "src/code.cloudfoundry.org/go-loggregator"]
+	path = src/code.cloudfoundry.org/go-loggregator
+	url = git@github.com:cloudfoundry/go-loggregator
+[submodule "src/google.golang.org/grpc"]
+	path = src/google.golang.org/grpc
+	url = git@github.com:grpc/grpc-go
+[submodule "src/github.com/golang/protobuf"]
+	path = src/github.com/golang/protobuf
+	url = git@github.com:golang/protobuf

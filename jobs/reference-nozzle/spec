@@ -1,0 +1,26 @@
+---
+name: reference-nozzle
+
+templates:
+  ctl.erb: bin/ctl
+  refnozzle.crt.erb: config/certs/refnozzle.crt
+  refnozzle.key.erb: config/certs/refnozzle.key
+  ca.crt.erb: config/certs/ca.crt
+
+packages:
+- refnozzle
+
+properties:
+  refnozzle.tls.cert:
+    description: "TLS certificate for the nozzle"
+  refnozzle.tls.key:
+    description: "TLS key for the nozzle"
+  refnozzle.tls.ca_cert:
+    description: "CA root required for key/cert verification"
+
+  refnozzle.source:
+    description: "Address of Loggregator's Reverse Log Proxy"
+
+  reference.destination:
+    description: "URL of HTTP service accepting JSON POST requests"
+

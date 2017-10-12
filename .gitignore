@@ -1,0 +1,35 @@
+
+# golang
+pkg/
+/bin/
+*.prof
+*.mprof
+*.coverprofile
+*.test
+
+# macOS
+.DS_Store
+
+# jetbrains
+.idea
+
+# bosh
+.blobs
+blobs
+.dev_builds
+dev_releases
+config/dev.yml
+config/private.yml
+releases/*.tgz
+releases/**/*.tgz
+
+# GOPATH tools
+src/github.com/cloudfoundry/loggregator-api
+src/github.com/onsi/ginkgo
+src/github.com/onsi/gomega
+src/golang.org/x/net
+src/golang.org/x/text
+src/google.golang.org/genproto
+src/gopkg.in/yaml.v2
+src/github.com/codegangsta/cli
+src/github.com/vito/gosub
