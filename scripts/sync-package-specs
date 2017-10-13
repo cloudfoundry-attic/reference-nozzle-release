@@ -31,6 +31,6 @@ function sync_package() {
   )
 }
 
-sync_package refnozzle -app code.cloudfoundry.org/refnozzle &
+sync_package refnozzle -app code.cloudfoundry.org/refnozzle/cmd/nozzle &
 
 wait

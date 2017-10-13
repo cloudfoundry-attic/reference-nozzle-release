@@ -2,7 +2,14 @@ set -e -x
 
 export GOROOT=$(readlink -nf /var/vcap/packages/golang1.9.1)
 export PATH=$GOROOT/bin:$PATH
-export GOPATH=$PWD
+export GOPATH=$PWD/refnozzle
 
-go install code.cloudfoundry.org/refnozzle/cmd/nozzle -o refnozzle
-cp -a $PWD/bin/refnozzle ${BOSH_INSTALL_TARGET}
+current=$(ls)
+mkdir -p refnozzle/src
+
+for i in $current; do mv $i refnozzle/src/; done
+
+pushd refnozzle
+    go install code.cloudfoundry.org/refnozzle/cmd/nozzle
+    cp -a $PWD/bin/nozzle ${BOSH_INSTALL_TARGET}/refnozzle
+popd

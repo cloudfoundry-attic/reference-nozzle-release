@@ -9,6 +9,12 @@ then
 fi
 
 bosh create-release --force
-bosh -e $env_name upload-release --rebase
-bosh -e $env_name deploy -n -d loggregator templates/loggregator.yml \
-    --vars-store=/tmp/loggregator-vars.yml
+bosh -e lite upload-release --rebase
+bosh -e lite -d reference-nozzle deploy manifests/reference-nozzle.yml \
+  -o manifests/ops-files/standalone-loggregator.yml \
+  --vars-file ~/workspace/loggregator/vars.yml \
+  -v reference-nozzle-destination=http://postprinter.bosh-lite.com \
+  -v reference-nozzle-shard-id=reference-nozzle-id \
+  --vars-store=vars.yml -n
+
+

@@ -1,0 +1,5 @@
+check process reference-nozzle
+  with pidfile /var/vcap/sys/run/reference-nozzle/reference-nozzle.pid
+  start program "/var/vcap/jobs/reference-nozzle/bin/ctl start"
+  stop program "/var/vcap/jobs/reference-nozzle/bin/ctl stop"
+  group vcap

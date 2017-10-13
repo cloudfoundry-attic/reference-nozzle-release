@@ -6,6 +6,7 @@ files:
 - code.cloudfoundry.org/diodes/*.go # gosub
 - code.cloudfoundry.org/go-loggregator/rpc/loggregator_v2/*.go # gosub
 - code.cloudfoundry.org/refnozzle/*.go # gosub
+- code.cloudfoundry.org/refnozzle/cmd/nozzle/*.go # gosub
 - github.com/golang/protobuf/proto/*.go # gosub
 - github.com/golang/protobuf/ptypes/*.go # gosub
 - github.com/golang/protobuf/ptypes/any/*.go # gosub

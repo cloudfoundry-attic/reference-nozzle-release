@@ -1,0 +1,4 @@
+- type: replace
+  path: /instance_groups/name=reference-nozzle/jobs/name=reference-nozzle/consumes/reverse_log_proxy?
+  value: {from: reverse_log_proxy, deployment: loggregator}
+

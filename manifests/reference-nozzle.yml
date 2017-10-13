@@ -1,0 +1,58 @@
+name: reference-nozzle
+
+stemcells:
+- alias: default
+  os: ubuntu-trusty
+  version: latest
+
+releases:
+- name: reference-nozzle
+  version: latest
+- name: bosh-dns
+  sha1: 0d55ec52b3a5c54a8284388d2400bf4c0172d7af
+  url: https://bosh.io/d/github.com/cloudfoundry/bosh-dns-release
+  version: 0.0.8
+
+instance_groups:
+- name: reference-nozzle
+  azs:
+  - z1
+  - z2
+  - z3
+  instances: 1
+  persistent_disk_type: 1GB
+  vm_type: minimal
+  stemcell: default
+  networks:
+  - name: default
+  jobs:
+  - name: bosh-dns
+    release: bosh-dns
+  - name: reference-nozzle
+    release: reference-nozzle
+    consumes:
+      reverse_log_proxy: {from: reverse_log_proxy, deployment: cf}
+    properties:
+      refnozzle:
+        tls:
+          cert: "((reference-nozzle.certificate))"
+          key: "((reference-nozzle.private_key))"
+          ca_cert: "((reference-nozzle.ca))"
+        destination: "((reference-nozzle-destination))"
+        shard_id: "((reference-nozzle-shard-id))"
+
+variables:
+- name: reference-nozzle
+  type: certificate
+  options:
+    ca: loggregator_ca
+    common_name: refnozzle
+    extended_key_usage:
+    - client_auth
+
+update:
+  canaries: 1
+  max_in_flight: 1
+  canary_watch_time: 30000-60000
+  update_watch_time: 30000-60000
+  serial: true

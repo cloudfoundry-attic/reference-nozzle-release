@@ -22,6 +22,7 @@ config/dev.yml
 config/private.yml
 releases/*.tgz
 releases/**/*.tgz
+vars.yml
 
 # GOPATH tools
 src/github.com/cloudfoundry/loggregator-api

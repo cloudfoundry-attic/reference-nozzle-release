@@ -7,6 +7,10 @@ templates:
   refnozzle.key.erb: config/certs/refnozzle.key
   ca.crt.erb: config/certs/ca.crt
 
+consumes:
+- name: reverse_log_proxy
+  type: reverse_log_proxy
+
 packages:
 - refnozzle
 
@@ -18,9 +22,7 @@ properties:
   refnozzle.tls.ca_cert:
     description: "CA root required for key/cert verification"
 
-  refnozzle.source:
-    description: "Address of Loggregator's Reverse Log Proxy"
-
-  reference.destination:
+  refnozzle.destination:
     description: "URL of HTTP service accepting JSON POST requests"
-
+  refnozzle.shard_id:
+    description: "Unique ID that identifies this nozzle"

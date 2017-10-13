@@ -6,7 +6,7 @@ PIDFILE="${RUN_DIR}/reference-nozzle.pid"
 JOB_DIR=/var/vcap/jobs/reference-nozzle
 CERT_DIR="${JOB_DIR}/config/certs"
 
-PACKAGE_DIR=/var/vcap/packages/reference-nozzle
+PACKAGE_DIR=/var/vcap/packages/refnozzle
 
 case $1 in
 
@@ -23,13 +23,20 @@ case $1 in
 
     cd $PACKAGE_DIR
 
+    <%
+        rlp=link('reverse_log_proxy')
+        rlp_addr=rlp.address(azs: [spec.az])
+        rlp_port=rlp.p('reverse_log_proxy.egress.port')
+    %>
+
     echo $$ > $PIDFILE
     exec chpst -u vcap:vcap ./refnozzle \
-      --ca=$CERT_DIR/mutual_tls_ca.crt \
-      --cert=$CERT_DIR/reference-nozzle.crt \
-      --key=$CERT_DIR/reference-nozzle.key \
-      --src="<%= p('refnozzle.source') %>" \
-      --dest="<%= p('refnozzle.destination') %>" \
+      --ca=$CERT_DIR/ca.crt \
+      --cert=$CERT_DIR/refnozzle.crt \
+      --key=$CERT_DIR/refnozzle.key \
+      --events-src="<%= "#{rlp_addr}:#{rlp_port}" %>" \
+      --report-url="<%= p('refnozzle.destination') %>" \
+      --shard-id="<%= p('refnozzle.shard_id') %>" \
       &>> ${LOG_DIR}/refnozzle.log
 
     ;;
