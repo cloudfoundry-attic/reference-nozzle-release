@@ -3,7 +3,7 @@ name: refnozzle
 dependencies:
 - golang1.9.1
 files:
-- code.cloudfoundry.org/diodes/*.go # gosub
+- code.cloudfoundry.org/go-diodes/*.go # gosub
 - code.cloudfoundry.org/go-loggregator/rpc/loggregator_v2/*.go # gosub
 - code.cloudfoundry.org/refnozzle/*.go # gosub
 - code.cloudfoundry.org/refnozzle/cmd/nozzle/*.go # gosub

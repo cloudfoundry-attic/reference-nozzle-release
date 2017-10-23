@@ -26,6 +26,5 @@ vars.yml
 
 # GOPATH tools
 src/github.com/cloudfoundry/loggregator-api
-src/google.golang.org/genproto
 src/github.com/codegangsta/cli
 src/github.com/vito/gosub
