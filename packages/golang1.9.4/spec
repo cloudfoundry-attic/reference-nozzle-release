@@ -1,5 +1,0 @@
----
-name: golang1.9.4
-
-files:
-- golang/golang1.9.4.linux-amd64.tar.gz

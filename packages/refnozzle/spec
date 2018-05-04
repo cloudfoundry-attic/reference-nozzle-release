@@ -1,7 +1,7 @@
 ---
 name: refnozzle
 dependencies:
-- golang1.9.4
+- golang1.10.2
 files:
 - code.cloudfoundry.org/go-diodes/*.go # gosub
 - code.cloudfoundry.org/go-loggregator/rpc/loggregator_v2/*.go # gosub
