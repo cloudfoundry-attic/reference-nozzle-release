@@ -1,8 +1,4 @@
-set -e -x
-
-export GOROOT=$(readlink -nf /var/vcap/packages/golang1.12.4)
-export PATH=$GOROOT/bin:$PATH
-export GOPATH=$PWD/refnozzle
+set -ex
 
 current=$(ls)
 mkdir -p refnozzle/src
@@ -10,6 +6,8 @@ mkdir -p refnozzle/src
 for i in $current; do mv $i refnozzle/src/; done
 
 pushd refnozzle
-    go install code.cloudfoundry.org/refnozzle/cmd/nozzle
-    cp -a $PWD/bin/nozzle ${BOSH_INSTALL_TARGET}/refnozzle
+  source /var/vcap/packages/golang-1-linux/bosh/compile.env
+
+  go install code.cloudfoundry.org/refnozzle/cmd/nozzle
+  cp -a $PWD/bin/nozzle ${BOSH_INSTALL_TARGET}/refnozzle
 popd
